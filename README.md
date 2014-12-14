@@ -20,3 +20,10 @@ It crashed, wat do?
 --------------------
 
 Turn it off and turn it on again.
+
+Why it stupid?
+-------------------
+
+U might be wondering why some stupid things r, like Le Wrong Package Name and Le Wrong Speled Werds.  This is
+all in the spirt of Le YouTube Comment, duhhhhh.
+
