@@ -2,7 +2,6 @@ package jm.net.ac;
 
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,10 +15,13 @@ import java.io.IOException;
 
 import javax.annotation.CheckForNull;
 
+import jm.net.ac.service.AbstractService;
+import jm.net.ac.service.RycService;
+
 
 public class AwkardConversationEyes extends ActionBarActivity {
     private static final String TAG = "AwkwardConversationEyes";
-    private final YouTubeCommentService mCommentService = new YouTubeCommentService(this);
+    private final AbstractService mCommentService = new RycService();
     private TextView mCommentTextView;
     private Button   mMoarButton;
     private final SpeakNSpell mSpeakNSpell = new SpeakNSpell(this);
@@ -43,6 +45,7 @@ public class AwkardConversationEyes extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mCommentService.start();
         if(mSpeakNSpell.getState() == SpeakNSpell.State.IDLE) {
             startSpeakNSpell();
         }else if(mSpeakNSpell.getState() == SpeakNSpell.State.STARTED){
@@ -53,6 +56,7 @@ public class AwkardConversationEyes extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mCommentService.stop();
         if(mSpeakNSpell.getState() != SpeakNSpell.State.IDLE){
             mSpeakNSpell.shutdown();
         }
@@ -120,9 +124,9 @@ public class AwkardConversationEyes extends ActionBarActivity {
     }
 
     private static class NextCommentResult {
-        public final SimpleComment comment;
+        public final YoutubeComment comment;
         public final Throwable error;
-        public NextCommentResult(SimpleComment comment, Throwable error){
+        public NextCommentResult(YoutubeComment comment, Throwable error){
             this.comment = comment;
             this.error = error;
         }
@@ -138,12 +142,12 @@ public class AwkardConversationEyes extends ActionBarActivity {
         @Override
         protected NextCommentResult doInBackground(Void... params) {
             try {
-                final SimpleComment comment = mCommentService.nextComment();
+                final YoutubeComment comment = mCommentService.nextComment();
                 if(comment == null){
                     return new NextCommentResult(null, new Exception("no comments found!"));
                 }
                 return new NextCommentResult(comment, null);
-            } catch (IOException e) {
+            } catch (AwkwardException e) {
                 return new NextCommentResult(null, e);
             }
         }

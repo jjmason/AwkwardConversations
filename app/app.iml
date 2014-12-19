@@ -83,12 +83,13 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="lang-guess-0.0.7" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="jsr305" level="project" />
     <orderEntry type="library" exported="" name="okio-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="guava-11.0.2" level="project" />
-    <orderEntry type="library" exported="" name="android-rome-feed-reader-1.0.0-r2" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.8.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.1.0" level="project" />
   </component>
